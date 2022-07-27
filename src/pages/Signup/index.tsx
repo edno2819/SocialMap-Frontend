@@ -17,7 +17,7 @@ const Signup = () => {
         user: user,
         password: password
       })
-
+      alert("Conta criada!")
       navigate('/')
 
     } catch (err) {

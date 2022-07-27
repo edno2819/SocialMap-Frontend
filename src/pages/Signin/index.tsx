@@ -8,8 +8,9 @@ import FormLogin from '../../components/LoginAndRegister/FormLogin'
 
 
 interface TokenUser {
+  name: string,
   user: string;
-  profile: string;
+  profile_id: string;
 }
 
 const Signin = () => {
@@ -24,8 +25,10 @@ const Signin = () => {
       const { accessToken } = response.data
       localStorage.setItem('accessToken', accessToken)
       const decoded = jwt_decode(accessToken) as TokenUser
+      console.log(decoded)
+      localStorage.setItem("name", decoded.name)
       localStorage.setItem("user", decoded.user)
-      localStorage.setItem("profile", decoded.profile)
+      localStorage.setItem("profile", decoded.profile_id)
       navigate('/home')
 
     } catch (err) {

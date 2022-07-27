@@ -1,8 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Signin from './pages/Signin';
-import Home from './pages/home';
-import Signup from './pages/Signup';
+import Home from './pages/Home';
+import Singin from './pages/Signin';
+import Singup from './pages/Signup';
+import NewPost from './pages/NewPost';
+import Profile from './pages/Profile';
+import Profiles from './pages/Profiles';
 
 import './App.css';
 
@@ -10,11 +13,16 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Signin />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/register" element={<Signup />} />
+        <Route path='/' element={<Singin />}></Route>
+        <Route path='/home' element={<Home />}></Route>
+        <Route path='/register' element={<Singup />}></Route>
+        <Route path='/create' element={<NewPost />}></Route>
+        <Route path='/profile' element={<Profile />}></Route>
+        <Route path='/profiles' element={<Profiles />}></Route>
       </Routes>
     </BrowserRouter>
+
+
   );
 }
 

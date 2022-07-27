@@ -17,6 +17,7 @@ Repositorios
 
 Youtube
 - https://github.com/bc-fullstack-01/materiais/blob/master/aulas-gravadas.md
+- https://www.youtube.com/watch?v=WWhgssiyfwY
 
 
 TO do:
