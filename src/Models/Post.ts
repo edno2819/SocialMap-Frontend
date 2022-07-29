@@ -1,4 +1,5 @@
 import { Profile } from './Profile'
+import { Comment } from './Comment'
 
 export interface Post {
     _id: string;
@@ -6,6 +7,6 @@ export interface Post {
     content: string;
     midia: string;
     profile: Profile;
-    comments: string[];
+    comments: Comment[];
     likes: string[];
 }

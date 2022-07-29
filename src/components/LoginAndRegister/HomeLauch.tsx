@@ -11,7 +11,6 @@ const HomeLauch = ({ children }: Props) => {
     return (
         <div className="login">
             <div className="loginWrapper">
-            <div className="wave"></div>
                 <div className="loginLeft">
                     <h3 className="loginLogo">SocialMap</h3>
                     <span className="loginDesc">

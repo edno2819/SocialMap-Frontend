@@ -24,7 +24,6 @@ const CustomActionIcon = ({ commentsCount, likeCount, likes, postId }: Props) =>
     }, [profile, likes])
 
     const handleLike = async () => {
-        console.log('casa')
         try {
 
             if (!liked) {

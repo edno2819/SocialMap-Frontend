@@ -4,11 +4,7 @@ export interface Profile {
     user: string;
     midia: string;
     about: string;
-    following: {
-        name: string[]
-    };
-    followers: {
-        name: string[]
-    };
+    following: string[]
+    followers: string[]
     active: boolean;
 }

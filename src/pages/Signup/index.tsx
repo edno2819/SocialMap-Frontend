@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import server from '../../api/server'
+import { toast } from 'react-toastify';
 
 import HomeLauch from '../../components/LoginAndRegister/HomeLauch'
 import RegisterForm from '../../components/LoginAndRegister/RegisterForm'
@@ -17,12 +18,11 @@ const Signup = () => {
         user: user,
         password: password
       })
-      alert("Conta criada!")
+      toast.success('Conta criada!');
       navigate('/')
 
     } catch (err) {
-      console.log(err)
-      alert("Não foi possível criar o usuário!")
+      toast.warning('Não foi possível criar o usuário!');
     }
   }
 

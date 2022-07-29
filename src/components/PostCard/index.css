@@ -1,3 +1,17 @@
+.main{
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px 5% 0px 5%;
+    border-radius: 15px;
+
+}
+.main:hover{
+    background-color: var(--background-mid);
+}
+
+
+
 .CardAction {
     display: flex;
     flex-direction: row;
@@ -6,8 +20,9 @@
 }
 
 .imagePost {
-    height: auto; 
-    max-width: 100%; 
+    height: auto;
+    width: 100%;
+    max-width: 650px;
     max-height: 500px;
 
     margin-left: auto;
@@ -17,7 +32,18 @@
     border-style: solid;
     border-color: rgba(10, 10, 10, 0.486);
     border-width: 1px;
-    
+
     opacity: 1 !important;
 
+}
+
+.postText {
+    text-align: justify;
+    color: rgba(8, 8, 8, 0.808);
+    margin: 3px;
+
+}
+
+.postTitle{
+    margin: 0px;
 }

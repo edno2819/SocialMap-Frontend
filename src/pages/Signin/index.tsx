@@ -1,6 +1,8 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import jwt_decode from 'jwt-decode'
+import { toast } from "react-toastify";
+
 import server from '../../api/server'
 
 import HomeLauch from '../../components/LoginAndRegister/HomeLauch'
@@ -32,8 +34,7 @@ const Signin = () => {
       navigate('/home')
 
     } catch (err) {
-      console.log(err)
-      alert("Não foi possível realizar o login!")
+      toast.warning('Não foi possível realizar o login! Verifique as credenciais!');
     }
 
   }

@@ -1,18 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import CustomAppBar from '../../components/CustomAppBar';
-import server from '../../api/server';
-import PostCard from '../../components/PostCard';
-import { Post } from "../../Models/Post";
+
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 import InfiniteScroll from "react-infinite-scroll-component";
+
+import CustomAppBar from '../../components/CustomAppBar';
+import PostCard from '../../components/PostCard';
+import ProfileSide from '../../components/ProfileSide'
+
+import { Post } from "../../Models/Post";
+import server from '../../api/server';
 
 import "./index.css";
 
 
 const Home = () => {
+  const navigate = useNavigate();
   const token = localStorage.getItem("accessToken");
+  const profile_id = localStorage.getItem("profile");
 
   const [posts, setPosts] = useState<Post[]>([])
   const [page, setPage] = useState<number>(0)
+  const [hasMore, setHasMore] = useState<boolean>(true)
+  const [profile, setProfile] = useState<any>({name:'edno',followers:[1,2,3], following:[1,3,5,4]})
 
   useEffect(() => {
     const getPosts = async () => {
@@ -22,10 +32,10 @@ const Home = () => {
             authorization: `Bearer ${token}`
           }
         });
-        console.log(response);
-        setPosts([ ...posts, ...response.data ])
+        setHasMore(response.data.length > 0);
+        setPosts([...posts, ...response.data])
       } catch (error) {
-        console.log(error);
+        toast.error('Erro ao buscar postagens');
       }
     }
     getPosts();
@@ -35,24 +45,56 @@ const Home = () => {
     setPage(page + 1);
   }
 
+  const handlePostClick = (postId: string) => {
+    navigate(`/posts/${postId}`);
+  }
+
+  useEffect(() => {
+    const getProfile = async () => {
+      try {
+        const response = await server.get(`/profiles/${profile_id}`, {
+          headers: {
+            authorization: `Bearer ${token}`
+          }
+        });
+        setProfile(response.data)
+        console.log(response.data)
+
+      } catch (error) {
+        toast.warning('Erro ao obter o perfil!');
+      }
+    }
+    getProfile()
+  }, [token])
+
   return (
     <div>
-      <CustomAppBar title='Home'/>
-      <div style={{ marginTop: "56px" }}>
-        <InfiniteScroll
-          dataLength={posts.length}
-          next={loadMorePosts}
-          hasMore={true}
-          loader={<h4>Loading...</h4>}
-        >
-          {posts && posts.map((post) => (
-            <div key={post._id}>
-              <PostCard post={post}/>
-              <hr/>
-            </div>
-          ))}
-        </InfiniteScroll>
+      <CustomAppBar title='Home' />
+      
+      <div className="Home">
+        <ProfileSide profile={profile} />
+
+        <div className='midDiv'>
+          <InfiniteScroll
+            dataLength={posts.length}
+            next={loadMorePosts}
+            hasMore={hasMore}
+            loader={<h4>Loading...</h4>}
+          >
+            {posts && posts.map((post) => (
+              <div key={post._id}>
+                <PostCard post={post} handlePostClick={handlePostClick} />
+                <hr />
+              </div>
+            ))}
+          </InfiniteScroll>
+        </div>
+
+        <div className='divLeft'/>
       </div>
+
+
+
     </div>
   );
 };

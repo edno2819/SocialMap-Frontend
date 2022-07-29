@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { CircularProgress, TextField } from '@mui/material';
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify';
 
 
 import "./RegisterForm.css";
@@ -26,8 +27,10 @@ const FormRegister = ({ onSubmitForm, onRouteLink }: Props) => {
             onSubmitForm(name.value, user.value, password.value)
             setIsFetching(false)
         } else {
-            alert("Senhas não correspondem!")
+            toast.warning("Senhas não correspondem!");
             setIsFetching(false)
+            setPassword2({ value: "", error: "" })
+            setPassword({ value: "", error: "" })
         }
     }
     return (<>
