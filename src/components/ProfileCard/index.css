@@ -25,7 +25,9 @@
 
 .ProfileImages>img:nth-of-type(2) {
     width: 6rem;
-    height: 5rem;
+    height: 6rem;
+    object-fit: cover;
+
     border-radius: 50%;
     position: absolute;
     bottom: -3rem;
@@ -39,7 +41,8 @@
     margin-top: 3rem;
     gap: 10px;
 }
-.about{
+
+.about {
     width: 85%;
     align-self: center;
     text-align: justify;
@@ -90,7 +93,7 @@
 
 .vl {
     height: 60px;
-    border-left: 2px solid  var(--hrColor);
+    border-left: 2px solid var(--hrColor);
 }
 
 

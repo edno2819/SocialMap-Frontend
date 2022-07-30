@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import { toast } from "react-toastify";
-import { Divider, TextField, Paper, Button, CardHeader, CardContent } from "@mui/material";
+import { Divider, TextField, Button, CardHeader, CardContent } from "@mui/material";
 
 import { Post } from "../../Models/Post";
 import server from '../../api/server';
@@ -17,6 +17,9 @@ import "./index.css";
 
 const PostDetail = () => {
     const token = localStorage.getItem('accessToken');
+    const profileId = localStorage.getItem('profile');
+    const profileName = localStorage.getItem('name');
+
     const { postId } = useParams();
     const [post, setPost] = useState<Post>();
     const [comment, setComment] = useState({ value: "", error: "" });
@@ -29,7 +32,6 @@ const PostDetail = () => {
                         authorization: `Bearer ${token}`,
                     },
                 });
-                console.log(response.data)
                 setPost(response.data);
             } catch (err) {
                 toast.error('Não foi possível carregar o post');
@@ -42,7 +44,7 @@ const PostDetail = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const response = await server.post(`/posts/${postId}/comments`,
+            const response = await server.post(`/posts/${postId}/comment`,
                 { description: comment.value },
                 {
                     headers: {
@@ -51,8 +53,18 @@ const PostDetail = () => {
                 });
 
             setComment({ ...comment, value: "" });
-            post?.comments.push(response.data);
+            const newComment = {
+                ...response.data,
+                description: comment.value,
+                profile: {
+                    _id: profileId,
+                    name: profileName,
+                }
+            }
+            post?.comments.push(newComment);
             setPost(post);
+            toast.success('Comentário realizado!');
+
         } catch (err) {
             toast.error('Ocorreu um erro ao adicionar um comentário');
         }
@@ -64,11 +76,11 @@ const PostDetail = () => {
             <div style={{ marginTop: "56px" }}>
                 {post && <PostCard post={post} handlePostClick={() => { }} />}
             </div>
-            <Divider />
-            <div className="main">
+            <br />
+            <Divider style={{ marginRight: "10%", marginLeft: "10%" }} />
+            <br />
+            <div className="containerComment">
                 <form onSubmit={(e) => handleSubmit(e)}>
-
-
                     <TextField
                         id="comment"
                         label="Novo comentário"
@@ -90,19 +102,22 @@ const PostDetail = () => {
                     </div>
                 </form>
             </div >
-            <Divider sx={{ marginTop: 2 }} />
-                {post?.comments && post?.comments.map((item) => (
-                    <div className="main" key={item._id}>
-                            <CardHeader
-                                avatar={<CustomAvatar profileName={item.profile.name} />}
-                                title={<h3>{Utils.fistToUpperCase(item.profile.name)}</h3>}
-                                style={{ padding: 0 }}
-                            />
-                            <CardContent style={{ padding: 0 }}>
-                                <p className="postTextComment">{item.description} </p>
-                            </CardContent>
-                    </div>
-                ))}
+            {post?.comments && post?.comments.map((item) => {
+                return (item.profile ?
+                    (<div className="main" key={item._id}>
+                        <CardHeader
+                            avatar={<CustomAvatar profileName={item.profile.name} />}
+                            title={<h3>{Utils.fistToUpperCase(item.profile.name)}</h3>}
+                            style={{ padding: 0 }}
+                        />
+                        <CardContent style={{ padding: 0 }}>
+                            <p className="postTextComment">{item.description} </p>
+                        </CardContent>
+                    </div>)
+                    :
+                    (<></>)
+                )
+            })}
         </div>
     );
 }

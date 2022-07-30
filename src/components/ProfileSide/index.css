@@ -6,6 +6,6 @@
     gap: 1rem;
     align-items: center;
     overflow: auto;
-    border-right: 1px solid rgba(87, 87, 87, 0.753);
+    border-right: 2px solid  var(--hrColor);
 
 }

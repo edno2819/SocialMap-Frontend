@@ -72,6 +72,7 @@ const Home = () => {
       <CustomAppBar title='Home' />
       
       <div className="Home">
+        
         <ProfileSide profile={profile} />
 
         <div className='midDiv'>

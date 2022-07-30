@@ -14,3 +14,10 @@
     --shedule: #E1AE4A;
     --background-mid: #EFF1F1;
 }
+
+
+hr {
+    margin-left: 5%;
+    margin-right: 5%;
+    border-top: 1px solid  var(--hrColor);
+}

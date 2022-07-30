@@ -7,12 +7,6 @@
 }
 
 
-hr {
-    margin-left: 5%;
-    margin-right: 5%;
-    border-top: 1px solid rgba(32, 32, 32, 0.575);
-}
-
 .midDiv {
     width: 100%;
     justify-content: center;
@@ -22,7 +16,7 @@ hr {
 }
 
 .divLeft {
-    border-left: 1px solid;
+    border-left: 1px solid  var(--hrColor);
 }
 
 

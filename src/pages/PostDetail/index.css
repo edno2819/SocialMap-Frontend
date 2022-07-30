@@ -11,4 +11,18 @@
     margin: 0;
     border: 0px;
     min-width: 300px;
+    padding-bottom: 30px;
+}
+
+.containerComment {
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px 5% 15px 5%;
+    border-radius: 15px;
+
+}
+
+.containerComment:hover {
+    background-color: var(--background-mid);
 }
