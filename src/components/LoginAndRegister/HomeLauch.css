@@ -7,7 +7,7 @@
     
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 .logo {
@@ -20,6 +20,8 @@
     height: 70%;
     display: flex;
     flex-wrap: wrap;
+
+    justify-content: space-evenly;
 
 }
 
@@ -42,6 +44,12 @@
 
 .loginDesc {
     font-size: 24px;
+}
+
+.loginDescName{
+    font-size: 18px;
+    margin: 10px 0 0 10px;
+    font-style: italic;
 }
 
 .loginBox {

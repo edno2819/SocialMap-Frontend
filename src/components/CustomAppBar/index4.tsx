@@ -15,10 +15,10 @@ import EditIcon from "@mui/icons-material/Edit";
 import GroupIcon from "@mui/icons-material/Group";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-
-
 import CustomIconButton from "../CustomIconButton";
 
+
+// https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_navbar_hide_scroll
 // https://codesandbox.io/s/69583309-how-to-center-search-component-in-app-bar-material-ui-63x1n?file=/src/App.js:1979-2052
 
 interface IProps {

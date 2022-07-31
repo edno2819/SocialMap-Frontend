@@ -31,7 +31,7 @@ const PostCard = ({ post, handlePostClick }: Props) => {
         <div className="main">
             <div onClick={() => handlePostClick(post._id)}>
                 <CardHeader
-                    avatar={<CustomAvatar profileName={post.profile.name} />}
+                    avatar={<CustomAvatar name={post.profile.name} profile_id={post.profile._id} midia={post.profile.midia} />}
                     title={<h2>{Utils.fistToUpperCase(post.profile.name)}</h2>}
                     style={style.card}
                 />

@@ -1,28 +1,35 @@
 import React from "react";
 
-import Cover from "../../assets/cover.jpg";
 import { Profile } from "../../Models/Profile"
 import Utils from "../../Utils"
+import Cover from "../../assets/backgroundPerfil";
+
 
 import "./index.css";
 
 interface IProps {
-  profile: Profile
+  profile: Profile,
+  QtdPost?: number,
+  resume?: boolean,
 }
 
-const ProfileCard = ({ profile }: IProps) => {
+const ProfileCard = ({ profile, QtdPost = 5, resume = false }: IProps) => {
+
 
   return (
     <div className="ProfileCard">
+
       <div className="ProfileImages">
-        <img src={Cover} alt="" />
+        <img className='imgCover' src={Cover[Utils.randomNumber(0, Cover.length)]} alt="" />
         <img src={profile.midia} alt="profile" />
       </div>
 
       <div className="ProfileName">
-        <span>{profile.name}</span>
+        <span>{Utils.capitalizeFirstLetter(profile.name)}</span>
         <div className="about">
-          {profile.about ? Utils.splitAbout(profile.about): <></>}
+          {profile.about ?
+            (resume ? Utils.splitAbout(profile.about) : profile.about)
+            : <></>}
         </div>
       </div>
 
@@ -38,10 +45,16 @@ const ProfileCard = ({ profile }: IProps) => {
             <span>{profile.followers.length}</span>
             <span>Followers</span>
           </div>
+          <div className="vl"></div>
+          <div className="follow">
+            <span>{QtdPost}</span>
+            <span>Posts</span>
+          </div>
         </div>
         <hr />
       </div>
-      <span>Meu Perfil</span>
+
+      {/* <span>Meu Perfil</span> */}
     </div>
   );
 };

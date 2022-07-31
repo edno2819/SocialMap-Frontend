@@ -13,6 +13,7 @@ interface TokenUser {
   name: string,
   user: string;
   profile_id: string;
+  midia: string;
 }
 
 const Signin = () => {
@@ -31,6 +32,7 @@ const Signin = () => {
       localStorage.setItem("name", decoded.name)
       localStorage.setItem("user", decoded.user)
       localStorage.setItem("profile", decoded.profile_id)
+      localStorage.setItem("userMidia", decoded.midia)
       navigate('/home')
 
     } catch (err) {

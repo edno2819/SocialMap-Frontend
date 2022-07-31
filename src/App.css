@@ -15,6 +15,9 @@
     --background-mid: #EFF1F1;
 }
 
+*{
+    box-sizing: border-box;
+}
 
 hr {
     margin-left: 5%;

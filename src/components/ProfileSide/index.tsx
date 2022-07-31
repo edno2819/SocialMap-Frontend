@@ -1,6 +1,5 @@
 import React from 'react'
 
-// import FollowersCard from '../FollowersCard'
 import ProfileCard from '../ProfileCard'
 import { Profile } from "../../Models/Profile"
 
@@ -11,12 +10,11 @@ interface IProps {
   profile: Profile 
 }
 
-const ProfileSide = ({ profile }: IProps) => {
+const ProfileSide = ({ profile}: IProps) => {
 
   return (
     <div className="ProfileSide">
-      <ProfileCard profile={profile} />
-      {/* <FollowersCard /> */}
+      <ProfileCard profile={profile} resume={true}/>
     </div>
   )
 }

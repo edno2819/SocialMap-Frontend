@@ -10,6 +10,7 @@ import ProfileSide from '../../components/ProfileSide'
 
 import { Post } from "../../Models/Post";
 import server from '../../api/server';
+import { Profile } from '../../Models/Profile'
 
 import "./index.css";
 
@@ -22,7 +23,7 @@ const Home = () => {
   const [posts, setPosts] = useState<Post[]>([])
   const [page, setPage] = useState<number>(0)
   const [hasMore, setHasMore] = useState<boolean>(true)
-  const [profile, setProfile] = useState<any>({name:'edno',followers:[1,2,3], following:[1,3,5,4]})
+  const [profile, setProfile] = useState<Profile>({ _id: '', name: '', followers: [''], following: [''], user: '' })
 
   useEffect(() => {
     const getPosts = async () => {

@@ -9,8 +9,9 @@ import Singin from './pages/Signin';
 import Singup from './pages/Signup';
 import NewPost from './pages/NewPost';
 import PostDetail from './pages/PostDetail';
-import Profile from './pages/Profile';
+import ProfilePage from './pages/Profile';
 import Profiles from './pages/Profiles';
+import ProfileSelf from './pages/ProfileSelf';
 
 
 
@@ -38,7 +39,8 @@ function App() {
         <Route path='/posts/:postId' element={<PostDetail />}></Route>
         <Route path='/register' element={<Singup />}></Route>
         <Route path='/create' element={<NewPost />}></Route>
-        <Route path='/profile' element={<Profile />}></Route>
+        <Route path='/profile/:profileId' element={<ProfilePage />}></Route>
+        <Route path='/profile' element={<ProfileSelf />}></Route>
         <Route path='/profiles' element={<Profiles />}></Route>
 
       </Routes>

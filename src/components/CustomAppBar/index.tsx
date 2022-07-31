@@ -1,140 +1,109 @@
-import { useNavigate } from 'react-router-dom';
-import {
-    styled,
-    alpha,
-    InputBase,
-    AppBar,
-    Toolbar,
-    Box,
-    Typography,
-    CssBaseline
-} from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
+import React, { useState } from 'react'
+import { useNavigate, Link } from 'react-router-dom';
+
 import HomeIcon from "@mui/icons-material/Home";
 import EditIcon from "@mui/icons-material/Edit";
 import GroupIcon from "@mui/icons-material/Group";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 
+import DropdownButton from 'react-bootstrap/DropdownButton'
+import Dropdown from 'react-bootstrap/Dropdown'
+
 
 import CustomIconButton from "../CustomIconButton";
+import SearchBar from '../SearchBar'
 
-// https://codesandbox.io/s/69583309-how-to-center-search-component-in-app-bar-material-ui-63x1n?file=/src/App.js:1979-2052
+import './index.css'
 
-interface IProps {
+interface Props {
     title: string;
 }
 
 
-const Search = styled("div")(({ theme }) => ({
-    position: "relative",
-    flexGrow: 1,
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    "&:hover": {
-        backgroundColor: alpha(theme.palette.common.white, 0.25)
-    },
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-        marginLeft: theme.spacing(1),
-        width: "auto"
-    }
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: "inherit",
-    "& .MuiInputBase-input": {
-        padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
-        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-        transition: theme.transitions.create("width"),
-        width: "100%",
-        [theme.breakpoints.up("sm")]: {
-            width: "12ch",
-            "&:focus": {
-                width: "20ch"
-            }
-        }
-    }
-}));
-
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexGrow: 3,
-}));
-
-
-const CustomAppBar = ({ title }: IProps) => {
+const CustomAppBar = ({ title }: Props) => {
     const navigate = useNavigate();
+    const profile_id = localStorage.getItem("profile");
+
+
+    const [repos, setRepos] = useState('')
+    const [isFetching, setIsFetching] = useState<boolean>(false)
+
+    var prevScrollpos = window.pageYOffset;
+    window.onscroll = function () {
+        var currentScrollPos = window.pageYOffset;
+        var headers = Array.from(
+            document.getElementsByClassName('navbarHeader') as HTMLCollectionOf<HTMLElement>,
+        );
+        if (prevScrollpos > currentScrollPos) {
+            headers[0].style.top = "0";
+        } else {
+            headers[0].style.top = "-50px";
+        }
+        prevScrollpos = currentScrollPos;
+    }
+
+
+
+    function handleSearch(e: React.KeyboardEvent<HTMLDivElement>) {
+        // const value = e.target.value
+        // const keyCode = e.which || e.keyCode
+        const ENTER = 13
+
+        // if (keyCode === ENTER) {
+        //     setIsFetching(true)
+        //     setIsFetching(false)
+        // }
+    }
+
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <CssBaseline />
-            <AppBar position="static">
-                <Toolbar
-                    sx={{
-                        justifyContent: "space-between"
-                    }}
-                >
+        <>
+            <div className='navbarHeader'>
+                <Link className='headerTitle' to='/home'>SocialMap</Link>
 
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        sx={{ display: { xs: "none", sm: "block" } }}
+                <SearchBar placeholder='Pesquise por posts' handleSearch={handleSearch} />
+
+                <div className='headerIcons'>
+                    <CustomIconButton
+                        label="Show Home"
+                        onCLickCallback={() => navigate('/home')}
                     >
-                        {title}
-                    </Typography>
+                        <HomeIcon />
+                    </CustomIconButton>
+                    <CustomIconButton
+                        label="Show Edit"
+                        onCLickCallback={() => navigate('/create')}
+                    >
+                        <EditIcon />
+                    </CustomIconButton>
+                    <CustomIconButton
+                        label="Show Profiles"
+                        onCLickCallback={() => navigate('/profiles')}
+                    >
+                        <GroupIcon />
+                    </CustomIconButton>
+                    <CustomIconButton
+                        label="Show Profile"
+                        onCLickCallback={() => navigate(`/profile/${profile_id}`)}
+                    >
+                        <AccountCircleIcon />
+                    </CustomIconButton>
+                </div>
 
-                    <Search>
-                        <SearchIconWrapper>
-                            <SearchIcon />
-                        </SearchIconWrapper>
-                        <StyledInputBase
-                            placeholder="Search…"
-                            inputProps={{ "aria-label": "search" }}
-                        />
-                    </Search>
+                <DropdownButton className="headerIconsMobile" id="dropdown-variants-Danger" variant='danger' title="all">
+                    <Dropdown.Item href="#home">Home</Dropdown.Item>
+                    <Dropdown.Item href="#carros">Carros</Dropdown.Item>
+                    <Dropdown.Item href="#sobre">Sobre</Dropdown.Item>
+                    <Dropdown.Item href="#contact">contato</Dropdown.Item>
+                    <Dropdown.Item href="#localizacao">Localização</Dropdown.Item>
+                    <Dropdown.Item href="https://fkaveiculos-backend.herokuapp.com/admin">Admin</Dropdown.Item>
+                </DropdownButton>
 
-                    <Box sx={{ display: { xs: "none", md: "flex" } }}>
-                        <CustomIconButton
-                            label="Show Home"
-                            onCLickCallback={() => navigate('/home')}
-                        >
-                            <HomeIcon />
-                        </CustomIconButton>
-                        <CustomIconButton
-                            label="Show Edit"
-                            onCLickCallback={() => navigate('/create')}
-                        >
-                            <EditIcon />
-                        </CustomIconButton>
-                        <CustomIconButton
-                            label="Show Profiles"
-                            onCLickCallback={() => navigate('/profiles')}
-                        >
-                            <GroupIcon />
-                        </CustomIconButton>
-                        <CustomIconButton
-                            label="Show Profile"
-                            onCLickCallback={() => navigate('/profile')}
-                        >
-                            <AccountCircleIcon />
-                        </CustomIconButton>
-                    </Box>
-
-                </Toolbar>
-            </AppBar>
-        </Box>
-    );
+            </div>
+            <div style={{ height: '60px' }} />
+        </>
+    )
 }
 
 export default CustomAppBar;

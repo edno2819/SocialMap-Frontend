@@ -42,10 +42,12 @@
 .postText {
     text-align: justify;
     color: rgba(8, 8, 8, 0.808);
-    margin: 3px;
+    margin: 5px 5px 15px 5px;
 
 }
 
 .postTitle{
     margin: 0px;
+    margin: 0 5px 5px 5px;
+
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import "./HomeLauch.css";
-
+import logo from '../../assets/SocialMap.gif'
 
 type Props = {
     children: JSX.Element,
@@ -12,9 +12,13 @@ const HomeLauch = ({ children }: Props) => {
         <div className="login">
             <div className="loginWrapper">
                 <div className="loginLeft">
+                    {/* <img src={logo} alt='logo'/> */}
                     <h3 className="loginLogo">SocialMap</h3>
                     <span className="loginDesc">
                         A melhor comunidade de desenvolvedores!
+                    </span>
+                    <span className="loginDescName">
+                        By: Edno Almeida
                     </span>
                 </div>
                 <div className="loginRight">
