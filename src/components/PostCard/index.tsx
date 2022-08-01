@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import { CardHeader, CardContent, CardActions } from '@mui/material';
 import CustomAvatar from "../CustomAvatar";
 import CustomActionIcon from "../CustomActionIcon";
@@ -61,4 +61,4 @@ const PostCard = ({ post, handlePostClick }: Props) => {
     )
 }
 
-export default PostCard;
+export default memo(PostCard);

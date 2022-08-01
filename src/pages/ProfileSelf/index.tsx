@@ -9,10 +9,6 @@ const ProfileSelf = () => {
 
     const profile_id = localStorage.getItem("profile");
 
-    const handlePostClick = (postId: string) => {
-        navigate(`/profile/${profile_id}`);
-    }
-
     return (
         <>
             <Profile />

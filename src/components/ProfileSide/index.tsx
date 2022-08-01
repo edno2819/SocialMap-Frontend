@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 import ProfileCard from '../ProfileCard'
 import { Profile } from "../../Models/Profile"
@@ -7,16 +7,16 @@ import "./index.css"
 
 
 interface IProps {
-  profile: Profile 
+  profile: Profile
 }
 
-const ProfileSide = ({ profile}: IProps) => {
+const ProfileSide = ({ profile }: IProps) => {
 
   return (
     <div className="ProfileSide">
-      <ProfileCard profile={profile} resume={true}/>
+      <ProfileCard profile={profile} resume={true} />
     </div>
   )
 }
 
-export default ProfileSide
+export default memo(ProfileSide)

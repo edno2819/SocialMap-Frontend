@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 
 import { toast } from 'react-toastify';
@@ -14,16 +15,20 @@ import { Profile } from '../../Models/Profile'
 
 import "./index.css";
 
-
 const Home = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("accessToken");
   const profile_id = localStorage.getItem("profile");
 
-  const [posts, setPosts] = useState<Post[]>([])
+  const [profile, setProfile] = useState<Profile>({ _id: '', name: '', followers: [''], following: [''], user: '' })
+
+  const [postsAll, setPostsAll] = useState<Post[]>([])
+  const [posts, setPosts] = useState<Post[]>([]);
+
   const [page, setPage] = useState<number>(0)
   const [hasMore, setHasMore] = useState<boolean>(true)
-  const [profile, setProfile] = useState<Profile>({ _id: '', name: '', followers: [''], following: [''], user: '' })
+
+
 
   useEffect(() => {
     const getPosts = async () => {
@@ -34,9 +39,13 @@ const Home = () => {
           }
         });
         setHasMore(response.data.length > 0);
-        setPosts([...posts, ...response.data])
+
+        var allPosts = [...postsAll, ...response.data]
+        setPostsAll(allPosts)
+        setPosts(allPosts)
+
       } catch (error) {
-        toast.error('Erro ao buscar postagens');
+        toast.warning('Erro ao buscar postagens');
       }
     }
     getPosts();
@@ -59,8 +68,6 @@ const Home = () => {
           }
         });
         setProfile(response.data)
-        console.log(response.data)
-
       } catch (error) {
         toast.warning('Erro ao obter o perfil!');
       }
@@ -68,12 +75,25 @@ const Home = () => {
     getProfile()
   }, [token])
 
+
+  function handleSearch(e: React.KeyboardEvent<HTMLInputElement>) {
+    var value = e.target.value
+    console.log(value)
+    if (value) {
+      var profilesFilted = postsAll.filter(post => `${post.title} ${post.content}`.includes(value))
+      setPosts(profilesFilted)
+    } else {
+      setPosts(postsAll)
+
+    }
+  }
+
   return (
     <div>
-      <CustomAppBar title='Home' />
-      
+      <CustomAppBar  handleSearch={handleSearch} />
+
       <div className="Home">
-        
+
         <ProfileSide profile={profile} />
 
         <div className='midDiv'>
@@ -81,10 +101,12 @@ const Home = () => {
             dataLength={posts.length}
             next={loadMorePosts}
             hasMore={hasMore}
-            loader={<h4>Loading...</h4>}
+            loader={
+              <h4 style={{ margin: 'auto' }}>Loading...</h4>
+            }
           >
             {posts && posts.map((post) => (
-              <div key={post._id}>
+              <div>
                 <PostCard post={post} handlePostClick={handlePostClick} />
                 <hr />
               </div>
@@ -92,7 +114,7 @@ const Home = () => {
           </InfiniteScroll>
         </div>
 
-        <div className='divLeft'/>
+        <div className='divLeft' />
       </div>
 
 

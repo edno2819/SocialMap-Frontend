@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+
 
 import server from "../../api/server";
 import CustomChatBubbleIcon from "../CustomChatBubbleIcon";
@@ -44,7 +46,7 @@ const CustomActionIcon = ({ commentsCount, likeCount, likes, postId }: Props) =>
                 setLikesCount(likesCount - 1);
             }
         } catch (error) {
-            console.log(error)
+            toast.warning('Não foi possível realizar a curtida!')
         }
     }
 

@@ -34,7 +34,7 @@ const FormRegister = ({ onSubmitForm, onRouteLink }: Props) => {
         }
     }
     return (<>
-        <form className="loginBox" onSubmit={handleSubmit}>
+        <form className="loginBoxRegister" onSubmit={handleSubmit}>
             <TextField
                 variant="outlined"
                 label="Nome"

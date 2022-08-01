@@ -35,6 +35,14 @@
 
 @media (max-width: 550px) {
     .Home {
-        grid-template-columns: 0% 100% 0%;
+        /* grid-template-columns: 0% 100% 0%; */
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .ProfileSide{
+        position: inherit;
+        height: auto;
+
     }
 }

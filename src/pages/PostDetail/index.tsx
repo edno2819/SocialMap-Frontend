@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import { toast } from "react-toastify";
@@ -75,7 +76,7 @@ const PostDetail = () => {
 
     return (
         <div className='midDivPost'>
-            <CustomAppBar title="Post" />
+            <CustomAppBar/>
 
             {post && <PostCard post={post} handlePostClick={() => { }} />}
             <br />

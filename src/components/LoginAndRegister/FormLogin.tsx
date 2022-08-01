@@ -20,13 +20,12 @@ const FormLogin = ({ onSubmitForm, onRouteLink }: Props) => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsFetching(true)
-        setTimeout(() => console.log(''), 5000)
         onSubmitForm(user.value, password.value)
         setIsFetching(false)
     }
 
     return (<>
-        <form className="loginBox" onSubmit={handleSubmit}>
+        <form className="loginBoxLogin" onSubmit={handleSubmit}>
             <TextField variant="outlined"
                 label="Usuário"
                 name='user'

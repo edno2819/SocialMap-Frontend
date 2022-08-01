@@ -21,15 +21,11 @@ const ProfilePage = () => {
   const { profileId } = useParams();
 
   const [profile, setProfile] = useState<Profile>({ _id: '', name: '', followers: [''], following: [''], user: '' })
+  
+  const [postsAll, setPostsAll] = useState<Post[]>([])
   const [posts, setPosts] = useState<Post[]>([])
+
   const [page, setPage] = useState<number>(0)
-
-
-  // const handleLogout = async () => {
-  //   toast.info(`Até mais, ${profile.name}!`)
-  //   localStorage.clear();
-  //   navigate("/");
-  // }
 
   useEffect(() => {
     const getProfile = async () => {
@@ -55,7 +51,7 @@ const ProfilePage = () => {
             authorization: `Bearer ${token}`
           }
         });
-        console.log(responsePost.data)
+        setPostsAll(responsePost.data)
         setPosts(responsePost.data)
 
       } catch (error) {
@@ -73,9 +69,21 @@ const ProfilePage = () => {
     navigate(`/posts/${postId}`);
   }
 
+  function handleSearch(e: React.KeyboardEvent<HTMLInputElement>) {
+    var value = e.target.value
+    console.log(value)
+    if (value) {
+      var profilesFilted = postsAll.filter(post => `${post.title} ${post.content}`.includes(value))
+      setPosts(profilesFilted)
+    } else {
+      setPosts(postsAll)
+
+    }
+  }
+
   return (
     <>
-      <CustomAppBar title='Perfil' />
+      <CustomAppBar handleSearch={handleSearch}/>
       <div className='ProfileBody'>
         <ProfileCard profile={profile} QtdPost={posts.length} />
         <br />

@@ -56,7 +56,7 @@ const NewPost = () => {
 
   return (
     <div>
-      <CustomAppBar title='Nova Postagem' />
+      <CustomAppBar/>
 
       <div className='mainNewPost'>
         <form onSubmit={handleSubmit}>

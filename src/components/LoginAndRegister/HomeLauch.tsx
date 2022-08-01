@@ -1,7 +1,6 @@
 import React from 'react'
 
 import "./HomeLauch.css";
-import logo from '../../assets/SocialMap.gif'
 
 type Props = {
     children: JSX.Element,

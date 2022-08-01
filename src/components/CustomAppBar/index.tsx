@@ -1,14 +1,10 @@
-import React, { useState } from 'react'
+import React, { memo } from 'react'
 import { useNavigate, Link } from 'react-router-dom';
 
-import HomeIcon from "@mui/icons-material/Home";
+import ReorderIcon from '@mui/icons-material/Reorder';
 import EditIcon from "@mui/icons-material/Edit";
 import GroupIcon from "@mui/icons-material/Group";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-
-
-import DropdownButton from 'react-bootstrap/DropdownButton'
-import Dropdown from 'react-bootstrap/Dropdown'
 
 
 import CustomIconButton from "../CustomIconButton";
@@ -16,18 +12,14 @@ import SearchBar from '../SearchBar'
 
 import './index.css'
 
-interface Props {
-    title: string;
+interface IProps {
+    handleSearch?: any;
 }
 
 
-const CustomAppBar = ({ title }: Props) => {
+const CustomAppBar = ({ handleSearch }: IProps) => {
     const navigate = useNavigate();
     const profile_id = localStorage.getItem("profile");
-
-
-    const [repos, setRepos] = useState('')
-    const [isFetching, setIsFetching] = useState<boolean>(false)
 
     var prevScrollpos = window.pageYOffset;
     window.onscroll = function () {
@@ -38,39 +30,23 @@ const CustomAppBar = ({ title }: Props) => {
         if (prevScrollpos > currentScrollPos) {
             headers[0].style.top = "0";
         } else {
-            headers[0].style.top = "-50px";
+            headers[0].style.top = "-60px";
         }
         prevScrollpos = currentScrollPos;
     }
-
-
-
-    function handleSearch(e: React.KeyboardEvent<HTMLDivElement>) {
-        // const value = e.target.value
-        // const keyCode = e.which || e.keyCode
-        const ENTER = 13
-
-        // if (keyCode === ENTER) {
-        //     setIsFetching(true)
-        //     setIsFetching(false)
-        // }
-    }
-
 
     return (
         <>
             <div className='navbarHeader'>
                 <Link className='headerTitle' to='/home'>SocialMap</Link>
 
-                <SearchBar placeholder='Pesquise por posts' handleSearch={handleSearch} />
+                {handleSearch ?
+                    <SearchBar placeholder='Pesquise por posts' handleSearch={handleSearch} />
+                    :
+                    <></>
+                }
 
                 <div className='headerIcons'>
-                    <CustomIconButton
-                        label="Show Home"
-                        onCLickCallback={() => navigate('/home')}
-                    >
-                        <HomeIcon />
-                    </CustomIconButton>
                     <CustomIconButton
                         label="Show Edit"
                         onCLickCallback={() => navigate('/create')}
@@ -83,6 +59,7 @@ const CustomAppBar = ({ title }: Props) => {
                     >
                         <GroupIcon />
                     </CustomIconButton>
+
                     <CustomIconButton
                         label="Show Profile"
                         onCLickCallback={() => navigate(`/profile/${profile_id}`)}
@@ -91,14 +68,31 @@ const CustomAppBar = ({ title }: Props) => {
                     </CustomIconButton>
                 </div>
 
-                <DropdownButton className="headerIconsMobile" id="dropdown-variants-Danger" variant='danger' title="all">
-                    <Dropdown.Item href="#home">Home</Dropdown.Item>
-                    <Dropdown.Item href="#carros">Carros</Dropdown.Item>
-                    <Dropdown.Item href="#sobre">Sobre</Dropdown.Item>
-                    <Dropdown.Item href="#contact">contato</Dropdown.Item>
-                    <Dropdown.Item href="#localizacao">Localização</Dropdown.Item>
-                    <Dropdown.Item href="https://fkaveiculos-backend.herokuapp.com/admin">Admin</Dropdown.Item>
-                </DropdownButton>
+                <li className="dropdown">
+                    <div className="dropbtn">{<ReorderIcon />}</div>
+                    <div className="dropdown-content">
+                        <CustomIconButton
+                            label="Show Edit"
+                            onCLickCallback={() => navigate('/create')}
+                        >
+                            <EditIcon />
+                        </CustomIconButton>
+                        <CustomIconButton
+                            label="Show Profiles"
+                            onCLickCallback={() => navigate('/profiles')}
+                        >
+                            <GroupIcon />
+                        </CustomIconButton>
+
+                        <CustomIconButton
+                            label="Show Profile"
+                            onCLickCallback={() => navigate(`/profile/${profile_id}`)}
+                        >
+                            <AccountCircleIcon />
+                        </CustomIconButton>
+                    </div>
+                </li>
+
 
             </div>
             <div style={{ height: '60px' }} />
@@ -106,4 +100,4 @@ const CustomAppBar = ({ title }: Props) => {
     )
 }
 
-export default CustomAppBar;
+export default memo(CustomAppBar);

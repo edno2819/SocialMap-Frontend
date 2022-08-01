@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { Stack, CardHeader, Divider, CardContent, Button } from '@mui/material';
 import { toast } from 'react-toastify';
@@ -15,6 +16,8 @@ import './index.css'
 const Profiles = () => {
   const token = localStorage.getItem("accessToken");
   const actualProfileId = localStorage.getItem("profile");
+
+  const [profilesAll, setProfilesAll] = useState<Profile[]>([]);
   const [profiles, setProfiles] = useState<Profile[]>([]);
 
   useEffect(() => {
@@ -25,8 +28,9 @@ const Profiles = () => {
             Authorization: `Bearer ${token}`
           }
         });
+        setProfilesAll(response.data);
+        setProfiles(response.data)
 
-        setProfiles(response.data);
       } catch (err) {
         toast.error('Ocorreu um erro ao buscar perfis');
       }
@@ -64,9 +68,23 @@ const Profiles = () => {
     }
   }
 
+
+  function handleSearch(e: React.KeyboardEvent<HTMLInputElement>) {
+
+    var value = e.target.value
+    console.log(value)
+    if (value) {
+      var profilesFilted = profilesAll.filter(profile => profile.name.includes(value))
+      setProfiles(profilesFilted)
+    } else {
+      setProfiles(profilesAll)
+
+    }
+  }
+
   return (
     <div>
-      <CustomAppBar title='Perfis' />
+      <CustomAppBar handleSearch={handleSearch} />
       <div className='main'>
         <Stack
           direction="column"
