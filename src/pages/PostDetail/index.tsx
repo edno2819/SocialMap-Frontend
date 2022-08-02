@@ -11,6 +11,8 @@ import CustomAvatar from "../../components/CustomAvatar";
 import { Post } from "../../Models/Post";
 import server from '../../api/server';
 import Utils from "../../Utils"
+import logo from '../../assets/logoAlert.png';
+
 
 import "./index.css";
 
@@ -36,7 +38,9 @@ const PostDetail = () => {
                 });
                 setPost(response.data);
             } catch (err) {
-                toast.warning('Não foi possível carregar o post!');
+                toast.warning('Não foi possível carregar o post!', {
+                    icon: () => <img src={logo} alt="logo SocialMap" />,
+                  });
             }
         }
         getPost();
@@ -45,7 +49,9 @@ const PostDetail = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (comment.value.length === 0) {
-            toast.warning('O comentário não deve ser vazio!');
+            toast.warning('O comentário não deve ser vazio!', {
+                icon: () => <img src={logo} alt="logo SocialMap" />,
+              });
         } else {
             try {
                 const response = await server.post(`/posts/${postId}/comment`,
@@ -69,7 +75,9 @@ const PostDetail = () => {
                 post?.comments.unshift(newComment);
                 setPost(post)
             } catch (err) {
-                toast.error('Ocorreu um erro ao adicionar um comentário');
+                toast.error('Ocorreu um erro ao adicionar um comentário', {
+                    icon: () => <img src={logo} alt="logo SocialMap" />,
+                  });
             }
         }
     };

@@ -7,6 +7,8 @@ import server from '../../api/server'
 
 import HomeLauch from '../../components/LoginAndRegister/HomeLauch'
 import FormLogin from '../../components/LoginAndRegister/FormLogin'
+import logo from '../../assets/logoAlert.png';
+
 
 
 interface TokenUser {
@@ -35,7 +37,9 @@ const Signin = () => {
       navigate('/home')
 
     } catch (err) {
-      toast.warning('Não foi possível realizar o login! Verifique as credenciais!');
+      toast.warning('Não foi possível realizar o login! Verifique as credenciais!', {
+        icon: () => <img src={logo} alt="logo SocialMap" />,
+      });
     }
 
   }

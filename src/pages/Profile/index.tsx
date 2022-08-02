@@ -12,7 +12,7 @@ import ProfileCard from '../../components/ProfileCard'
 import { Profile } from '../../Models/Profile'
 import { Post } from "../../Models/Post";
 
-
+import logo from '../../assets/logoAlert.png';
 import './index.css'
 
 const ProfilePage = () => {
@@ -37,7 +37,9 @@ const ProfilePage = () => {
         });
         setProfile(responseProfile.data)
       } catch (error) {
-        toast.warning('Erro ao obter o perfil!');
+        toast.warning('Erro ao obter o perfil!', {
+          icon: () => <img src={logo} alt="logo SocialMap" />,
+        });
       }
     }
     getProfile()
@@ -55,7 +57,9 @@ const ProfilePage = () => {
         setPosts(responsePost.data)
 
       } catch (error) {
-        toast.warning('Erro ao obter os Posts!');
+        toast.warning('Erro ao obter os Posts!', {
+          icon: () => <img src={logo} alt="logo SocialMap" />,
+        });
       }
     }
     getPosts()
@@ -71,7 +75,6 @@ const ProfilePage = () => {
 
   function handleSearch(e: React.KeyboardEvent<HTMLInputElement>) {
     var value = e.target.value
-    console.log(value)
     if (value) {
       var profilesFilted = postsAll.filter(post => `${post.title} ${post.content}`.includes(value))
       setPosts(profilesFilted)

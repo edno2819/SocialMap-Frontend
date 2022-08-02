@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import CustomAppBar from '../../components/CustomAppBar';
 import DropZone from '../../components/DropZone';
 import server from '../../api/server';
-import logo from '../../assets/logo.svg';
+import logo from '../../assets/logoAlert.png';
 
 import './index.css'
 
@@ -49,7 +49,7 @@ const NewPost = () => {
       navigate("/home");
     } catch (err) {
       toast.error('Ocorreu um erro ao criar o Post', {
-        icon: () => <img src={logo} alt="parrot logo" />,
+        icon: () => <img src={logo} alt="logo SocialMap" />,
       });
     }
   }

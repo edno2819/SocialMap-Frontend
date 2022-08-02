@@ -13,6 +13,8 @@ import ProfilePage from './pages/Profile';
 import Profiles from './pages/Profiles';
 import ProfileSelf from './pages/ProfileSelf';
 
+import AlertsContext from './contexts/AlertsContext'
+
 
 
 
@@ -20,31 +22,32 @@ import './App.css';
 
 function App() {
   return (
-    <BrowserRouter>
-      <ToastContainer
-        position="top-right"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
+    <AlertsContext>
+      <BrowserRouter>
+        <ToastContainer
+          position="top-right"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
 
-      <Routes>
-        <Route path='/' element={<Singin />}></Route>
-        <Route path='/home' element={<Home />}></Route>
-        <Route path='/posts/:postId' element={<PostDetail />}></Route>
-        <Route path='/register' element={<Singup />}></Route>
-        <Route path='/create' element={<NewPost />}></Route>
-        <Route path='/profile/:profileId' element={<ProfilePage />}></Route>
-        <Route path='/profile' element={<ProfileSelf />}></Route>
-        <Route path='/profiles' element={<Profiles />}></Route>
-
-      </Routes>
-    </BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Singin />}></Route>
+          <Route path='/home' element={<Home />}></Route>
+          <Route path='/posts/:postId' element={<PostDetail />}></Route>
+          <Route path='/register' element={<Singup />}></Route>
+          <Route path='/create' element={<NewPost />}></Route>
+          <Route path='/profile/:profileId' element={<ProfilePage />}></Route>
+          <Route path='/profile' element={<ProfileSelf />}></Route>
+          <Route path='/profiles' element={<Profiles />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </AlertsContext>
 
 
   );

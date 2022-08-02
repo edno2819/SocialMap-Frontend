@@ -10,6 +10,7 @@ import { Profile } from '../../Models/Profile'
 import server from '../../api/server';
 import Utils from "../../Utils"
 
+import logo from '../../assets/logoAlert.png';
 import './index.css'
 
 
@@ -32,7 +33,9 @@ const Profiles = () => {
         setProfiles(response.data)
 
       } catch (err) {
-        toast.error('Ocorreu um erro ao buscar perfis');
+        toast.error('Ocorreu um erro ao buscar perfis', {
+          icon: () => <img src={logo} alt="logo SocialMap" />,
+        });
       }
     }
 
@@ -64,15 +67,15 @@ const Profiles = () => {
       })
       setProfiles(newProfiles);
     } catch (err) {
-      toast.error('Ocorreu um erro ao tentar seguir');
+      toast.error('Ocorreu um erro ao tentar seguir', {
+        icon: () => <img src={logo} alt="logo SocialMap" />,
+      });
     }
   }
 
 
   function handleSearch(e: React.KeyboardEvent<HTMLInputElement>) {
-
     var value = e.target.value
-    console.log(value)
     if (value) {
       var profilesFilted = profilesAll.filter(profile => profile.name.includes(value))
       setProfiles(profilesFilted)

@@ -41,6 +41,7 @@
     }
 
     .ProfileSide{
+        width: 100%;
         position: inherit;
         height: auto;
 

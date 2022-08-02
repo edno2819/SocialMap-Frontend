@@ -67,7 +67,7 @@ li.dropdown {
 }
 
 
-@media (max-width: 800px) {
+@media (max-width: 840px) {
     li.dropdown {
         display: inline-block;
     }

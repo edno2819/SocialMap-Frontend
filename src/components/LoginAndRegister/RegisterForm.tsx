@@ -3,7 +3,7 @@ import { CircularProgress, TextField } from '@mui/material';
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify';
 
-
+import logo from '../../assets/logoAlert.png';
 import "./RegisterForm.css";
 
 
@@ -27,7 +27,9 @@ const FormRegister = ({ onSubmitForm, onRouteLink }: Props) => {
             onSubmitForm(name.value, user.value, password.value)
             setIsFetching(false)
         } else {
-            toast.warning("Senhas não correspondem!");
+            toast.warning("Senhas não correspondem!", {
+                icon: () => <img src={logo} alt="logo SocialMap" />,
+              });
             setIsFetching(false)
             setPassword2({ value: "", error: "" })
             setPassword({ value: "", error: "" })

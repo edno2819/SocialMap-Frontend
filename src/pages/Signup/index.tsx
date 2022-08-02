@@ -6,6 +6,9 @@ import { toast } from 'react-toastify';
 import HomeLauch from '../../components/LoginAndRegister/HomeLauch'
 import RegisterForm from '../../components/LoginAndRegister/RegisterForm'
 
+import logo from '../../assets/logoAlert.png';
+
+
 
 const Signup = () => {
   const navigate = useNavigate()
@@ -18,11 +21,15 @@ const Signup = () => {
         user: user,
         password: password
       })
-      toast.success('Conta criada!');
+      toast.success('Conta criada!', {
+        icon: () => <img src={logo} alt="logo SocialMap" />,
+      });
       navigate('/')
 
     } catch (err) {
-      toast.warning('Não foi possível criar o usuário!');
+      toast.warning('Não foi possível criar o usuário!', {
+        icon: () => <img src={logo} alt="logo SocialMap" />,
+      });
     }
   }
 

@@ -6,8 +6,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import GroupIcon from "@mui/icons-material/Group";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-
 import CustomIconButton from "../CustomIconButton";
+import ReceiveAlert from "../ReceiveAlert"
 import SearchBar from '../SearchBar'
 
 import './index.css'
@@ -45,18 +45,13 @@ const CustomAppBar = ({ handleSearch }: IProps) => {
                     :
                     <></>
                 }
-
+                <ReceiveAlert />
                 <div className='headerIcons'>
-                    <CustomIconButton
-                        label="Show Edit"
-                        onCLickCallback={() => navigate('/create')}
-                    >
+                    <CustomIconButton label="Show Edit" onCLickCallback={() => navigate('/create')} >
                         <EditIcon />
                     </CustomIconButton>
-                    <CustomIconButton
-                        label="Show Profiles"
-                        onCLickCallback={() => navigate('/profiles')}
-                    >
+
+                    <CustomIconButton label="Show Profiles" onCLickCallback={() => navigate('/profiles')} >
                         <GroupIcon />
                     </CustomIconButton>
 

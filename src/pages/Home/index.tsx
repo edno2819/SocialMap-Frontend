@@ -14,6 +14,8 @@ import server from '../../api/server';
 import { Profile } from '../../Models/Profile'
 
 import "./index.css";
+import logo from '../../assets/logoAlert.png';
+
 
 const Home = () => {
   const navigate = useNavigate();
@@ -27,7 +29,6 @@ const Home = () => {
 
   const [page, setPage] = useState<number>(0)
   const [hasMore, setHasMore] = useState<boolean>(true)
-
 
 
   useEffect(() => {
@@ -45,7 +46,9 @@ const Home = () => {
         setPosts(allPosts)
 
       } catch (error) {
-        toast.warning('Erro ao buscar postagens');
+        toast.warning('Erro ao buscar postagens', {
+          icon: () => <img src={logo} alt="logo SocialMap" />,
+        });
       }
     }
     getPosts();
@@ -69,7 +72,9 @@ const Home = () => {
         });
         setProfile(response.data)
       } catch (error) {
-        toast.warning('Erro ao obter o perfil!');
+        toast.warning('Erro ao obter o perfil!', {
+          icon: () => <img src={logo} alt="logo SocialMap" />,
+        });
       }
     }
     getProfile()
@@ -78,7 +83,6 @@ const Home = () => {
 
   function handleSearch(e: React.KeyboardEvent<HTMLInputElement>) {
     var value = e.target.value
-    console.log(value)
     if (value) {
       var profilesFilted = postsAll.filter(post => `${post.title} ${post.content}`.includes(value))
       setPosts(profilesFilted)

@@ -6,6 +6,8 @@ import server from "../../api/server";
 import CustomChatBubbleIcon from "../CustomChatBubbleIcon";
 import CustomFavoritIcon from "../CustomFavoriteIcon";
 
+import logo from '../../assets/logoAlert.png';
+
 interface Props {
     commentsCount: number;
     likeCount: number;
@@ -46,7 +48,9 @@ const CustomActionIcon = ({ commentsCount, likeCount, likes, postId }: Props) =>
                 setLikesCount(likesCount - 1);
             }
         } catch (error) {
-            toast.warning('Não foi possível realizar a curtida!')
+            toast.warning('Não foi possível realizar a curtida!', {
+                icon: () => <img src={logo} alt="logo SocialMap" />,
+              })
         }
     }
 

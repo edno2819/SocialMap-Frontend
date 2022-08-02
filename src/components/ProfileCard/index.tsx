@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 import { Profile } from "../../Models/Profile"
 import Utils from "../../Utils"
@@ -11,11 +11,10 @@ interface IProps {
   profile: Profile,
   QtdPost?: number,
   resume?: boolean,
+  isSelf?: boolean
 }
 
-const ProfileCard = ({ profile, QtdPost = 5, resume = false }: IProps) => {
-
-
+const ProfileCard = ({ profile, QtdPost = 5, resume = false, isSelf = false }: IProps) => {
   return (
     <div className="ProfileCard">
 
@@ -23,6 +22,12 @@ const ProfileCard = ({ profile, QtdPost = 5, resume = false }: IProps) => {
         <img className='imgCover' src={Cover[Utils.randomNumber(0, Cover.length)]} alt="" />
         <img src={profile.midia} alt="profile" />
       </div>
+
+      {isSelf ?
+        <button>Editar</button>
+        :
+        <button>seguir</button>
+      }
 
       <div className="ProfileName">
         <span>{Utils.capitalizeFirstLetter(profile.name)}</span>
@@ -59,4 +64,4 @@ const ProfileCard = ({ profile, QtdPost = 5, resume = false }: IProps) => {
   );
 };
 
-export default ProfileCard;
+export default memo(ProfileCard);
