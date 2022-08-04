@@ -28,13 +28,13 @@ const ReceiveAlert = () => {
     })
 
     useEffect(() => {
-        socket.on("connect_profile", (id) => {
-            console.log('connect_profile', id);
-        });
+        // socket.on("connect_profile", (id) => {
+        //     console.log('connect_profile', id);
+        // });
 
-        socket.on("disconnect", () => {
-            console.log(`disconnect socket`);
-        });
+        // socket.on("disconnect", () => {
+        //     console.log(`disconnect socket`);
+        // });
 
         socket.on("post-new", (data) => {
             console.log(`post socket- ${data}`);

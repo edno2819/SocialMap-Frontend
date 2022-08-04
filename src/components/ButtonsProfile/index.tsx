@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import server from '../../api/server'
 
@@ -39,9 +39,31 @@ export const ButtonsPerfilSelf = () => {
 }
 
 
-export const ButtonsPerfilFollow = () => {
+export const ButtonsPerfilFollow = ({ profileId }: { profileId: string }) => {
+    const navigate = useNavigate();
+
     const token = localStorage.getItem("accessToken");
-    const profileId = localStorage.getItem("profile");
+    const selfProfileId = localStorage.getItem("profile");
+
+    const [following, setFollowing] = useState<string[]>();
+
+    useEffect(() => {
+        const getProfile = async () => {
+            try {
+                const responseProfile = await server.get(`/profiles/${selfProfileId}`, {
+                    headers: {
+                        authorization: `Bearer ${token}`
+                    }
+                });
+                setFollowing(responseProfile.data.following)
+            } catch (error) {
+                toast.warning('Erro ao obter o perfil!', {
+                    icon: () => <img src={logo} alt="logo SocialMap" />,
+                });
+            }
+        }
+        getProfile()
+    }, [token])
 
 
     const handleFollow = async () => {
@@ -51,6 +73,7 @@ export const ButtonsPerfilFollow = () => {
                     Authorization: `Bearer ${token}`,
                 },
             });
+            setFollowing([profileId])
         } catch (err) {
             toast.error('Ocorreu um erro ao tentar seguir', {
                 icon: () => <img src={logo} alt="logo SocialMap" />,
@@ -58,15 +81,45 @@ export const ButtonsPerfilFollow = () => {
         }
     }
 
+    const handleUnfollow = async () => {
+        try {
+            await server.post(`/profiles/${profileId}/unfollow`, null, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            setFollowing([])
+
+        } catch (err) {
+            toast.error('Ocorreu um erro ao tentar seguir', {
+                icon: () => <img src={logo} alt="logo SocialMap" />,
+            });
+        }
+    }
+
+    if (selfProfileId === profileId) {
+        navigate(`/profile`);
+    }
+
     return (
         <div className="comands-profile-other">
-            <Button variant='contained'
-                onClick={() => handleFollow()}
-            >
-                Seguir
-            </Button>
+            {following && following.includes(profileId) ?
+                <Button variant='contained'
+                    sx={{ width: '100%' }}
+                    onClick={() => handleUnfollow()}
+                > Desseguir
+                </Button>
+                :
+                <Button variant='contained'
+                    sx={{ width: '100%' }}
+                    onClick={() => handleFollow()}
+                > Seguir
+                </Button>
+            }
+
         </div>
     )
-
 }
+
+
 

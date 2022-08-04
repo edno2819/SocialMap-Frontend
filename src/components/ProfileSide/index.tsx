@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 
 import ProfileCard from '../ProfileCard'
 import { Profile } from "../../Models/Profile"
+import { ButtonsPerfilSelf } from "../ButtonsProfile"
 
 import "./index.css"
 
@@ -17,6 +18,8 @@ const ProfileSide = ({ profile }: IProps) => {
       <ProfileCard profile={profile} resume={true} >
         <><br /><br /></>
       </ProfileCard>
+      <br /><br />
+      <ButtonsPerfilSelf />
     </div>
   )
 }

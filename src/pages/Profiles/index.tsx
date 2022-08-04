@@ -16,7 +16,10 @@ import './index.css'
 
 const Profiles = () => {
   const token = localStorage.getItem("accessToken");
-  const actualProfileId = localStorage.getItem("profile");
+  const selfProfile = localStorage.getItem("profile");
+
+  const [profilesSelf, setProfilesSelf] = useState<Profile>();
+
 
   const [profilesAll, setProfilesAll] = useState<Profile[]>([]);
   const [profiles, setProfiles] = useState<Profile[]>([]);
@@ -29,8 +32,9 @@ const Profiles = () => {
             Authorization: `Bearer ${token}`
           }
         });
-        setProfilesAll(response.data);
-        setProfiles(response.data)
+        var profileWithOutSelf = response.data.filter((item: Profile) => item._id !== selfProfile)
+        setProfilesAll(profileWithOutSelf);
+        setProfiles(profileWithOutSelf)
 
       } catch (err) {
         toast.error('Ocorreu um erro ao buscar perfis', {
@@ -42,6 +46,24 @@ const Profiles = () => {
     getProfiles();
   }, [token])
 
+  useEffect(() => {
+    const getProfile = async () => {
+      try {
+        const responseProfile = await server.get(`/profiles/${selfProfile}`, {
+          headers: {
+            authorization: `Bearer ${token}`
+          }
+        });
+        setProfilesSelf(responseProfile.data)
+      } catch (error) {
+        toast.warning('Erro ao obter o perfil!', {
+          icon: () => <img src={logo} alt="logo SocialMap" />,
+        });
+      }
+    }
+    getProfile()
+  }, [token])
+
   const handleFollow = async (id: string) => {
     try {
       await server.post(`/profiles/${id}/follow`, null, {
@@ -49,6 +71,8 @@ const Profiles = () => {
           Authorization: `Bearer ${token}`,
         },
       });
+      profilesSelf && profilesSelf.following.push(id)
+      setProfilesSelf(profilesSelf)
 
       const newProfiles = profiles.map((profile) => {
         if (profile._id === id) {
@@ -56,10 +80,10 @@ const Profiles = () => {
             ...profile,
             followers: [...profile.followers, id],
           };
-        } else if (profile._id === actualProfileId) {
+        } else if (profile._id === selfProfile) {
           return {
             ...profile,
-            following: [...profile.followers, actualProfileId],
+            following: [...profile.followers, selfProfile],
           };
         } else {
           return profile;
@@ -131,12 +155,21 @@ const Profiles = () => {
                 </div>
 
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
-                  <Button variant='contained'
-                    sx={{ width: '100%' }}
-                    onClick={() => handleFollow(profile._id)}
-                  >
-                    Seguir
-                  </Button>
+
+                  {profilesSelf && profilesSelf.following.includes(profile._id) ?
+                    <Button variant='contained'
+                      sx={{ width: '100%' }}
+                      onClick={() => { }}
+                    > Seguindo
+                    </Button>
+                    :
+                    <Button variant='contained'
+                      sx={{ width: '100%' }}
+                      onClick={() => handleFollow(profile._id)}
+                    > Seguir
+                    </Button>
+                  }
+
                 </div>
 
               </div>

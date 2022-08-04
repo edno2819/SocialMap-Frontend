@@ -92,7 +92,7 @@ const ProfilePage = () => {
       <CustomAppBar handleSearch={handleSearch} />
       <div className='ProfileBody'>
         <ProfileCard profile={profile} QtdPost={posts.length}>
-          <ButtonsPerfilFollow />
+          <ButtonsPerfilFollow profileId={profileId as string}/>
         </ProfileCard>
         <br />
 

@@ -17,8 +17,6 @@ import EditPerfil from './pages/EditPerfil';
 import AlertsContext from './contexts/AlertsContext'
 
 
-
-
 import './App.css';
 
 function App() {
