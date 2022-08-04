@@ -57,7 +57,7 @@ const CustomAppBar = ({ handleSearch }: IProps) => {
 
                     <CustomIconButton
                         label="Show Profile"
-                        onCLickCallback={() => navigate(`/profile/${profile_id}`)}
+                        onCLickCallback={() => navigate(`/profile`)}
                     >
                         <AccountCircleIcon />
                     </CustomIconButton>
@@ -81,7 +81,7 @@ const CustomAppBar = ({ handleSearch }: IProps) => {
 
                         <CustomIconButton
                             label="Show Profile"
-                            onCLickCallback={() => navigate(`/profile/${profile_id}`)}
+                            onCLickCallback={() => navigate(`/profile`)}
                         >
                             <AccountCircleIcon />
                         </CustomIconButton>

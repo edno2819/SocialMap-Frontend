@@ -14,7 +14,9 @@ const ProfileSide = ({ profile }: IProps) => {
 
   return (
     <div className="ProfileSide">
-      <ProfileCard profile={profile} resume={true} />
+      <ProfileCard profile={profile} resume={true} >
+        <><br /><br /></>
+      </ProfileCard>
     </div>
   )
 }

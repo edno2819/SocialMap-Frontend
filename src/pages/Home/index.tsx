@@ -94,11 +94,12 @@ const Home = () => {
 
   return (
     <div>
-      <CustomAppBar  handleSearch={handleSearch} />
+      <CustomAppBar handleSearch={handleSearch} />
 
       <div className="Home">
 
-        <ProfileSide profile={profile} />
+        <ProfileSide profile={profile}/>
+
 
         <div className='midDiv'>
           <InfiniteScroll

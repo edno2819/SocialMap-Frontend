@@ -12,6 +12,7 @@ import PostDetail from './pages/PostDetail';
 import ProfilePage from './pages/Profile';
 import Profiles from './pages/Profiles';
 import ProfileSelf from './pages/ProfileSelf';
+import EditPerfil from './pages/EditPerfil';
 
 import AlertsContext from './contexts/AlertsContext'
 
@@ -44,6 +45,7 @@ function App() {
           <Route path='/create' element={<NewPost />}></Route>
           <Route path='/profile/:profileId' element={<ProfilePage />}></Route>
           <Route path='/profile' element={<ProfileSelf />}></Route>
+          <Route path='/profile/edit' element={<EditPerfil />}></Route>
           <Route path='/profiles' element={<Profiles />}></Route>
         </Routes>
       </BrowserRouter>

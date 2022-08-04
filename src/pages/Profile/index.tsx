@@ -3,6 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import server from '../../api/server'
 import InfiniteScroll from "react-infinite-scroll-component";
+import { ButtonsPerfilFollow } from "../../components/ButtonsProfile"
+
 
 import PostCard from '../../components/PostCard';
 
@@ -21,7 +23,7 @@ const ProfilePage = () => {
   const { profileId } = useParams();
 
   const [profile, setProfile] = useState<Profile>({ _id: '', name: '', followers: [''], following: [''], user: '' })
-  
+
   const [postsAll, setPostsAll] = useState<Post[]>([])
   const [posts, setPosts] = useState<Post[]>([])
 
@@ -84,11 +86,14 @@ const ProfilePage = () => {
     }
   }
 
+
   return (
     <>
-      <CustomAppBar handleSearch={handleSearch}/>
+      <CustomAppBar handleSearch={handleSearch} />
       <div className='ProfileBody'>
-        <ProfileCard profile={profile} QtdPost={posts.length} />
+        <ProfileCard profile={profile} QtdPost={posts.length}>
+          <ButtonsPerfilFollow />
+        </ProfileCard>
         <br />
 
         <InfiniteScroll

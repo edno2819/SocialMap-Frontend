@@ -12,7 +12,7 @@ export const Alerts = createContext<React.MutableRefObject<number> | any>({ curr
 
 
 export default function AlertsContext({ children }: { children: any }) {
-    const countPersistent = useRef(0);
+    const countPersistent = useRef(Base);
 
     return (
         <Alerts.Provider value={{ countPersistent }}>

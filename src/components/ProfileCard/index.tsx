@@ -4,17 +4,16 @@ import { Profile } from "../../Models/Profile"
 import Utils from "../../Utils"
 import Cover from "../../assets/backgroundPerfil";
 
-
 import "./index.css";
 
 interface IProps {
   profile: Profile,
+  children: JSX.Element,
   QtdPost?: number,
   resume?: boolean,
-  isSelf?: boolean
 }
 
-const ProfileCard = ({ profile, QtdPost = 5, resume = false, isSelf = false }: IProps) => {
+const ProfileCard = ({ profile, children, QtdPost = 5, resume = false, }: IProps) => {
   return (
     <div className="ProfileCard">
 
@@ -23,11 +22,7 @@ const ProfileCard = ({ profile, QtdPost = 5, resume = false, isSelf = false }: I
         <img src={profile.midia} alt="profile" />
       </div>
 
-      {isSelf ?
-        <button>Editar</button>
-        :
-        <button>seguir</button>
-      }
+      {children}
 
       <div className="ProfileName">
         <span>{Utils.capitalizeFirstLetter(profile.name)}</span>
@@ -59,7 +54,6 @@ const ProfileCard = ({ profile, QtdPost = 5, resume = false, isSelf = false }: I
         <hr />
       </div>
 
-      {/* <span>Meu Perfil</span> */}
     </div>
   );
 };
