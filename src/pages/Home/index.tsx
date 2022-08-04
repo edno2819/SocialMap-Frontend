@@ -8,6 +8,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import CustomAppBar from '../../components/CustomAppBar';
 import PostCard from '../../components/PostCard';
 import ProfileSide from '../../components/ProfileSide'
+import FeedRightSide from '../../components/FeedRightSide'
 
 import { Post } from "../../Models/Post";
 import server from '../../api/server';
@@ -98,8 +99,7 @@ const Home = () => {
 
       <div className="Home">
 
-        <ProfileSide profile={profile}/>
-
+        <ProfileSide profile={profile} />
 
         <div className='midDiv'>
           <InfiniteScroll
@@ -119,7 +119,9 @@ const Home = () => {
           </InfiniteScroll>
         </div>
 
-        <div className='divLeft' />
+          <FeedRightSide />
+
+
       </div>
 
 

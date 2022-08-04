@@ -20,7 +20,10 @@ const ReceiveAlert = () => {
     const token = localStorage.getItem("accessToken");
 
     const { countPersistent } = useContext(Alerts)
-    const [messageCount, setMessageCount] = useState(countPersistent.current);
+    const [postNew, setPostNew] = useState(countPersistent.current["post-new"]);
+    const [postLike, setPostLike] = useState(countPersistent.current["post-like"]);
+    const [comment, setComment] = useState(countPersistent.current["comment-new"]);
+    const [follow, setFollow] = useState(countPersistent.current["follow-new"]);
 
     const socket = io(CONSTANTS.SOCKET_HOST, {
         auth: { token },
@@ -37,22 +40,29 @@ const ReceiveAlert = () => {
         // });
 
         socket.on("post-new", (data) => {
-            console.log(`post socket- ${data}`);
             countPersistent.current["post-new"] += 1
+            setPostNew(countPersistent.current["post-new"])
+            console.log(`post socket- ${data}`);
+
         });
 
         socket.on("post-like", (data) => {
-            console.log(`post-like socket- ${data}`);
             countPersistent.current["post-like"] += 1
+            setPostLike(countPersistent.current["post-like"])
+            console.log(`post-like socket- ${data}`);
+
         });
 
         socket.on("comment-new", (data) => {
-            console.log(`comment-new- ${data}`);
             countPersistent.current["comment-new"] += 1
+            setComment(countPersistent.current["comment-new"])
+            console.log(`comment-new- ${data}`);
+
         });
 
         socket.on("follow-new", (data) => {
             countPersistent.current["follow-new"] += 1
+            setFollow(countPersistent.current["follow-new"])
             console.log(data);
         });
 
@@ -67,15 +77,8 @@ const ReceiveAlert = () => {
     }, [token, socket]);
 
     const handleCleanAlert = (value: string) => {
-        if (messageCount) {
-            countPersistent.current[value] = 0
-            window.location.reload();
-        }
+        countPersistent.current[value] = 0
     };
-
-    useEffect(() => {
-        setMessageCount(countPersistent.current)
-    }, [countPersistent]);
 
     return (
         <>
@@ -83,7 +86,7 @@ const ReceiveAlert = () => {
                 <div className="dropbtnAlert">{
                     <Badge
                         badgeContent={
-                            Object.keys(messageCount).reduce((sum, key) => sum + parseFloat(messageCount[key] || 0), 0)
+                            Object.keys(countPersistent.current).reduce((sum, key) => sum + parseFloat(countPersistent.current[key] || 0), 0)
                         }
                         color="error">
                         <NotificationsIcon />
@@ -93,9 +96,12 @@ const ReceiveAlert = () => {
                 <div className="dropdownAlert-content">
                     <CustomIconButton
                         label="post-like"
-                        onCLickCallback={() => handleCleanAlert("post-like")}
+                        onCLickCallback={() => {
+                            handleCleanAlert("post-like")
+                            setPostLike(0)
+                        }}
                     >
-                        <Badge badgeContent={messageCount["post-like"]} color="error">
+                        <Badge badgeContent={postLike} color="error">
 
                             <ThumbUpIcon />
                         </Badge>
@@ -103,9 +109,12 @@ const ReceiveAlert = () => {
 
                     <CustomIconButton
                         label="comment-new"
-                        onCLickCallback={() => handleCleanAlert("comment-new")}
+                        onCLickCallback={() => {
+                            handleCleanAlert("comment-new")
+                            setComment(0)
+                        }}
                     >
-                        <Badge badgeContent={messageCount["comment-new"]} color="error">
+                        <Badge badgeContent={comment} color="error">
 
                             <AddCommentIcon />
                         </Badge>
@@ -113,18 +122,24 @@ const ReceiveAlert = () => {
 
                     <CustomIconButton
                         label="follow-new"
-                        onCLickCallback={() => handleCleanAlert("follow-new")}
+                        onCLickCallback={() => {
+                            handleCleanAlert("follow-new")
+                            setFollow(0)
+                        }}
                     >
-                        <Badge badgeContent={messageCount["follow-new"]} color="error">
+                        <Badge badgeContent={follow} color="error">
                             <PersonAddIcon />
                         </Badge>
                     </CustomIconButton>
 
                     <CustomIconButton
                         label="post-new"
-                        onCLickCallback={() => handleCleanAlert("post-new")}
+                        onCLickCallback={() => {
+                            handleCleanAlert("post-new")
+                            setPostNew(0)
+                        }}
                     >
-                        <Badge badgeContent={messageCount["post-new"]} color="error">
+                        <Badge badgeContent={postNew} color="error">
                             <PostAddIcon />
                         </Badge>
                     </CustomIconButton>

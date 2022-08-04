@@ -15,10 +15,6 @@
     min-width: 300px;
 }
 
-.divLeft {
-    border-left: 1px solid  var(--hrColor);
-}
-
 
 @media (min-width: 1500px) {
     .Home {
