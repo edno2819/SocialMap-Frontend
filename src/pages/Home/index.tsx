@@ -17,13 +17,22 @@ import { Profile } from '../../Models/Profile'
 import "./index.css";
 import logo from '../../assets/logoAlert.png';
 
+const profileClean = {
+  _id: '',
+  name: '',
+  followers: [''],
+  following: [''],
+  posts: [''],
+  user: ''
+}
+
 
 const Home = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("accessToken");
   const profile_id = localStorage.getItem("profile");
 
-  const [profile, setProfile] = useState<Profile>({ _id: '', name: '', followers: [''], following: [''], user: '' })
+  const [profile, setProfile] = useState<Profile>(profileClean)
 
   const [postsAll, setPostsAll] = useState<Post[]>([])
   const [posts, setPosts] = useState<Post[]>([]);
@@ -119,7 +128,7 @@ const Home = () => {
           </InfiniteScroll>
         </div>
 
-          <FeedRightSide />
+        <FeedRightSide />
 
 
       </div>

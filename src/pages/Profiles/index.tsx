@@ -148,7 +148,7 @@ const Profiles = () => {
                     </div>
                     <div className="vl"></div>
                     <div className="follow">
-                      <span>32</span>
+                      <span>{profile.posts.length}</span>
                       <span>Posts</span>
                     </div>
                   </div>

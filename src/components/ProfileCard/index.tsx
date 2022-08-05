@@ -9,11 +9,10 @@ import "./index.css";
 interface IProps {
   profile: Profile,
   children: JSX.Element,
-  QtdPost?: number,
   resume?: boolean,
 }
 
-const ProfileCard = ({ profile, children, QtdPost = 5, resume = false, }: IProps) => {
+const ProfileCard = ({ profile, children, resume = false, }: IProps) => {
   return (
     <div className="ProfileCard">
 
@@ -47,7 +46,7 @@ const ProfileCard = ({ profile, children, QtdPost = 5, resume = false, }: IProps
           </div>
           <div className="vl"></div>
           <div className="follow">
-            <span>{QtdPost}</span>
+            <span>{profile.posts.length}</span>
             <span>Posts</span>
           </div>
         </div>

@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import InfiniteScroll from "react-infinite-scroll-component";
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import server from '../../api/server'
-import InfiniteScroll from "react-infinite-scroll-component";
+
 import { ButtonsPerfilFollow } from "../../components/ButtonsProfile"
-
-
-import PostCard from '../../components/PostCard';
-
 import CustomAppBar from '../../components/CustomAppBar';
 import ProfileCard from '../../components/ProfileCard'
+import PostCard from '../../components/PostCard';
 
 import { Profile } from '../../Models/Profile'
 import { Post } from "../../Models/Post";
@@ -17,12 +15,22 @@ import { Post } from "../../Models/Post";
 import logo from '../../assets/logoAlert.png';
 import './index.css'
 
+
+const profileClean = {
+  _id: '',
+  name: '',
+  followers: [''],
+  following: [''],
+  posts: [''],
+  user: ''
+}
+
 const ProfilePage = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("accessToken");
   const { profileId } = useParams();
 
-  const [profile, setProfile] = useState<Profile>({ _id: '', name: '', followers: [''], following: [''], user: '' })
+  const [profile, setProfile] = useState<Profile>(profileClean)
 
   const [postsAll, setPostsAll] = useState<Post[]>([])
   const [posts, setPosts] = useState<Post[]>([])
@@ -91,8 +99,8 @@ const ProfilePage = () => {
     <>
       <CustomAppBar handleSearch={handleSearch} />
       <div className='ProfileBody'>
-        <ProfileCard profile={profile} QtdPost={posts.length}>
-          <ButtonsPerfilFollow profileId={profileId as string}/>
+        <ProfileCard profile={profile}>
+          <ButtonsPerfilFollow profileId={profileId as string} />
         </ProfileCard>
         <br />
 

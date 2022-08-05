@@ -17,12 +17,22 @@ import { Post } from "../../Models/Post";
 import logo from '../../assets/logoAlert.png';
 import './index.css'
 
+
+const profileClean = {
+  _id: '',
+  name: '',
+  followers: [''],
+  following: [''],
+  posts: [''],
+  user: ''
+}
+
 const ProfileSelf = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("accessToken");
   const profileId = localStorage.getItem("profile");
 
-  const [profile, setProfile] = useState<Profile>({ _id: '', name: '', followers: [''], following: [''], user: '' })
+  const [profile, setProfile] = useState<Profile>(profileClean)
 
   const [postsAll, setPostsAll] = useState<Post[]>([])
   const [posts, setPosts] = useState<Post[]>([])
@@ -90,7 +100,7 @@ const ProfileSelf = () => {
     <>
       <CustomAppBar handleSearch={handleSearch} />
       <div className='ProfileBody'>
-        <ProfileCard profile={profile} QtdPost={posts.length}>
+        <ProfileCard profile={profile}>
           <ButtonsPerfilSelf />
         </ProfileCard>
         <br />

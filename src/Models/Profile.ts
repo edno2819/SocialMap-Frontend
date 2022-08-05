@@ -4,7 +4,8 @@ export interface Profile {
     user: string;
     midia?: string;
     about?: string;
-    following: string[]
-    followers: string[]
+    following: string[];
+    followers: string[];
+    posts: string[];
     active?: boolean;
 }

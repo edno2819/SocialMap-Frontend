@@ -75,6 +75,7 @@ export const ButtonsPerfilFollow = ({ profileId }: { profileId: string }) => {
                 },
             });
             setFollowing([profileId])
+            window.location.reload();
         } catch (err) {
             toast.error('Ocorreu um erro ao tentar seguir', {
                 icon: () => <img src={logo} alt="logo SocialMap" />,
@@ -90,6 +91,7 @@ export const ButtonsPerfilFollow = ({ profileId }: { profileId: string }) => {
                 },
             });
             setFollowing([])
+            window.location.reload();
 
         } catch (err) {
             toast.error('Ocorreu um erro ao tentar seguir', {
