@@ -60,7 +60,6 @@ const EditPerfil = () => {
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-        console.log(name, value)
         setFormData({ ...formData, [name]: value });
     }
 

@@ -30,7 +30,6 @@ const FeedRightSide = () => {
                         authorization: `Bearer ${token}`
                     }
                 });
-                console.log(response.data)
                 setProfiles(response.data.users)
             } catch (error) {
                 toast.warning('Erro ao obter o perfil de seguidores!', {
