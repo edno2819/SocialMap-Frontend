@@ -91,7 +91,7 @@ const Profiles = () => {
       })
       setProfiles(newProfiles);
     } catch (err) {
-      toast.error('Ocorreu um erro ao tentar seguir', {
+      toast.error('Ocorreu um erro ao tentar seguir!', {
         icon: () => <img src={logo} alt="logo SocialMap" />,
       });
     }
@@ -105,7 +105,6 @@ const Profiles = () => {
       setProfiles(profilesFilted)
     } else {
       setProfiles(profilesAll)
-
     }
   }
 

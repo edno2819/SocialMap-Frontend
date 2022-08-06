@@ -75,7 +75,6 @@ export function DropZoneEdit({ onFileUploaded, midia }: IProps) {
                 :
                 (midia ?
                     <img src={midia} alt="profile" className="ImageEdit" />
-
                     :
                     <div>
                         <ImageIcon style={{ fontSize: '50px' }} />

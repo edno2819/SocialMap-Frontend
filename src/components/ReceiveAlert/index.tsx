@@ -1,18 +1,16 @@
 import React, { memo, useEffect, useState, useContext } from 'react'
 import io from "socket.io-client"
-import CONSTANTS from '../../constants'
 
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import AddCommentIcon from '@mui/icons-material/AddComment';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import PostAddIcon from '@mui/icons-material/PostAdd';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
-
 import { Badge } from '@mui/material';
 
 import { Alerts } from '../../contexts/AlertsContext'
-
 import CustomIconButton from "../CustomIconButton";
+import CONSTANTS from '../../constants'
 
 import './index.css'
 
@@ -42,28 +40,28 @@ const ReceiveAlert = () => {
         socket.on("post-new", (data) => {
             countPersistent.current["post-new"] += 1
             setPostNew(countPersistent.current["post-new"])
-            console.log(`post socket- ${data}`);
+            // console.log(`post socket- ${data}`);
 
         });
 
         socket.on("post-like", (data) => {
             countPersistent.current["post-like"] += 1
             setPostLike(countPersistent.current["post-like"])
-            console.log(`post-like socket- ${data}`);
+            // console.log(`post-like socket- ${data}`);
 
         });
 
         socket.on("comment-new", (data) => {
             countPersistent.current["comment-new"] += 1
             setComment(countPersistent.current["comment-new"])
-            console.log(`comment-new- ${data}`);
+            // console.log(`comment-new- ${data}`);
 
         });
 
         socket.on("follow-new", (data) => {
             countPersistent.current["follow-new"] += 1
             setFollow(countPersistent.current["follow-new"])
-            console.log(data);
+            // console.log(data);
         });
 
         socket.on("connect_error", (err) => {

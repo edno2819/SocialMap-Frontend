@@ -88,10 +88,7 @@ const ProfilePage = () => {
     if (value) {
       var profilesFilted = postsAll.filter(post => `${post.title} ${post.content}`.includes(value))
       setPosts(profilesFilted)
-    } else {
-      setPosts(postsAll)
-
-    }
+    } else setPosts(postsAll)
   }
 
 
@@ -99,6 +96,7 @@ const ProfilePage = () => {
     <>
       <CustomAppBar handleSearch={handleSearch} />
       <div className='ProfileBody'>
+        
         <ProfileCard profile={profile}>
           <ButtonsPerfilFollow profileId={profileId as string} />
         </ProfileCard>

@@ -1,7 +1,8 @@
 import React, {memo} from "react";
 import { CardHeader, CardContent, CardActions } from '@mui/material';
-import CustomAvatar from "../CustomAvatar";
+
 import CustomActionIcon from "../CustomActionIcon";
+import CustomAvatar from "../CustomAvatar";
 import { Post } from "../../Models/Post";
 import Utils from "../../Utils"
 
@@ -12,7 +13,6 @@ interface Props {
     post: Post;
     handlePostClick: any
 }
-
 
 const style = {
     paper: {

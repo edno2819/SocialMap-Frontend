@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-
-import server from "../../api/server";
 import CustomChatBubbleIcon from "../CustomChatBubbleIcon";
 import CustomFavoritIcon from "../CustomFavoriteIcon";
+import server from "../../api/server";
 
 import logo from '../../assets/logoAlert.png';
+
 
 interface Props {
     commentsCount: number;
@@ -17,8 +17,9 @@ interface Props {
 
 const CustomActionIcon = ({ commentsCount, likeCount, likes, postId }: Props) => {
     const token = localStorage.getItem("accessToken");
-    const [liked, setLiked] = useState(false);
     const profile = localStorage.getItem("profile") as string;
+
+    const [liked, setLiked] = useState(false);
     const [likesCount, setLikesCount] = useState(likeCount)
 
     useEffect(() => {

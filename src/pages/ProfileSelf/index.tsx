@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import InfiniteScroll from "react-infinite-scroll-component";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import server from '../../api/server'
-import InfiniteScroll from "react-infinite-scroll-component";
+
 import { ButtonsPerfilSelf } from "../../components/ButtonsProfile"
-
-
-import PostCard from '../../components/PostCard';
-
 import CustomAppBar from '../../components/CustomAppBar';
 import ProfileCard from '../../components/ProfileCard'
+import PostCard from '../../components/PostCard';
 
 import { Profile } from '../../Models/Profile'
 import { Post } from "../../Models/Post";
+
+import server from '../../api/server'
 
 import logo from '../../assets/logoAlert.png';
 import './index.css'
@@ -100,6 +99,7 @@ const ProfileSelf = () => {
     <>
       <CustomAppBar handleSearch={handleSearch} />
       <div className='ProfileBody'>
+        
         <ProfileCard profile={profile}>
           <ButtonsPerfilSelf />
         </ProfileCard>

@@ -1,4 +1,4 @@
-.ProfileSideRight{
+.ProfileSideRight {
     position: sticky;
     top: 0;
     height: 100vh;
@@ -6,10 +6,10 @@
     gap: 1rem;
     align-items: center;
     overflow: auto;
-    border-left: 2px solid  var(--hrColor);
+    border-left: 2px solid var(--hrColor);
 }
 
-.ProfileSideRight .card{
+.ProfileSideRight .card {
     background-color: #EFF1F1;
     border-radius: 10px;
     margin: 5%;
@@ -17,19 +17,19 @@
 
 }
 
-.card  .title{
+.card .title {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 
-.ProfileSideRight .cardFollower{
+.ProfileSideRight .cardFollower {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 
-.ProfileSideRight .cardFollower button{
+.ProfileSideRight .cardFollower button {
     height: 25px;
     background-image: linear-gradient(90deg, #2c0749 0%, #3F53B5 99%);
 

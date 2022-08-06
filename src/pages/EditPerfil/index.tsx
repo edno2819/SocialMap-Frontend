@@ -9,7 +9,6 @@ import { Profile } from '../../Models/Profile'
 import server from '../../api/server';
 
 import logo from '../../assets/logoAlert.png';
-
 import './index.css'
 
 const profileClean = {

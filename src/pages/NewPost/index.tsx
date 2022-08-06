@@ -1,18 +1,19 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { TextField, Stack, Button } from '@mui/material';
-import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import CustomAppBar from '../../components/CustomAppBar';
 import DropZone from '../../components/DropZone';
 import server from '../../api/server';
-import logo from '../../assets/logoAlert.png';
 
+import logo from '../../assets/logoAlert.png';
 import './index.css'
 
 const NewPost = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("accessToken");
+
   const [selectedFile, setSelectedFile] = useState<File>();
   const [formData, setFormData] = useState({
     title: "",
@@ -36,17 +37,15 @@ const NewPost = () => {
       data.append("file", selectedFile);
     };
 
-
     try {
       await server.post('/posts', data, {
         headers: { Authorization: `Bearer ${token}` },
       });
-
       toast.success('Post criado com sucesso!', {
         icon: () => <img src={logo} alt="logo" />,
       });
-
       navigate("/home");
+
     } catch (err) {
       toast.error('Ocorreu um erro ao criar o Post', {
         icon: () => <img src={logo} alt="logo SocialMap" />,
@@ -56,7 +55,7 @@ const NewPost = () => {
 
   return (
     <div>
-      <CustomAppBar/>
+      <CustomAppBar />
 
       <div className='mainNewPost'>
         <form onSubmit={handleSubmit}>

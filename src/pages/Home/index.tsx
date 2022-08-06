@@ -130,10 +130,7 @@ const Home = () => {
 
         <FeedRightSide />
 
-
       </div>
-
-
 
     </div>
   );

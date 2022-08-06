@@ -1,15 +1,12 @@
 import React from 'react'
 import './index.css'
 
-const SearchBar = ({placeholder, handleSearch}:{placeholder:string, handleSearch?:any}) => {
-
-    //         setIsFetching(true)
-
+const SearchBar = ({ placeholder, handleSearch }: { placeholder: string, handleSearch?: any }) => {
     return (
         <div className='search'>
             <input
                 type='search'
-                placeholder="Pesquisar ..."
+                placeholder={placeholder}
                 disabled={false}
                 onKeyUp={(e) => handleSearch(e)}
             />

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import server from '../../api/server'
 import { toast } from 'react-toastify';
+import server from '../../api/server'
 
 import HomeLauch from '../../components/LoginAndRegister/HomeLauch'
 import RegisterForm from '../../components/LoginAndRegister/RegisterForm'

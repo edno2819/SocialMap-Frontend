@@ -37,14 +37,14 @@ function App() {
 
         <Routes>
           <Route path='/' element={<Singin />}></Route>
-          <Route path='/home' element={<Home />}></Route>
-          <Route path='/posts/:postId' element={<PostDetail />}></Route>
           <Route path='/register' element={<Singup />}></Route>
-          <Route path='/create' element={<NewPost />}></Route>
-          <Route path='/profile/:profileId' element={<ProfilePage />}></Route>
+          <Route path='/home' element={<Home />}></Route>
           <Route path='/profile' element={<ProfileSelf />}></Route>
+          <Route path='/profile/:profileId' element={<ProfilePage />}></Route>
           <Route path='/profile/edit' element={<EditPerfil />}></Route>
           <Route path='/profiles' element={<Profiles />}></Route>
+          <Route path='/posts/:postId' element={<PostDetail />}></Route>
+          <Route path='/post/create' element={<NewPost />}></Route>
         </Routes>
       </BrowserRouter>
     </AlertsContext>

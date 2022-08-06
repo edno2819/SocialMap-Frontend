@@ -1,7 +1,7 @@
 import React from "react";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Typography, IconButton } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 interface Props {
     handleLike: any;

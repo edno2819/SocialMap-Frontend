@@ -1,8 +1,8 @@
 import React, { memo } from "react";
 
+import Cover from "../../assets/backgroundPerfil";
 import { Profile } from "../../Models/Profile"
 import Utils from "../../Utils"
-import Cover from "../../assets/backgroundPerfil";
 
 import "./index.css";
 

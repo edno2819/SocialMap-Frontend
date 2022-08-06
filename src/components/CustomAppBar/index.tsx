@@ -1,10 +1,9 @@
 import React, { memo } from 'react'
 import { useNavigate, Link } from 'react-router-dom';
-
-import ReorderIcon from '@mui/icons-material/Reorder';
-import EditIcon from "@mui/icons-material/Edit";
-import GroupIcon from "@mui/icons-material/Group";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import ReorderIcon from '@mui/icons-material/Reorder';
+import GroupIcon from "@mui/icons-material/Group";
+import EditIcon from "@mui/icons-material/Edit";
 
 import CustomIconButton from "../CustomIconButton";
 import ReceiveAlert from "../ReceiveAlert"
@@ -19,7 +18,6 @@ interface IProps {
 
 const CustomAppBar = ({ handleSearch }: IProps) => {
     const navigate = useNavigate();
-    const profile_id = localStorage.getItem("profile");
 
     var prevScrollpos = window.pageYOffset;
     window.onscroll = function () {
@@ -47,7 +45,7 @@ const CustomAppBar = ({ handleSearch }: IProps) => {
                 }
                 <ReceiveAlert />
                 <div className='headerIcons'>
-                    <CustomIconButton label="Show Edit" onCLickCallback={() => navigate('/create')} >
+                    <CustomIconButton label="Show Edit" onCLickCallback={() => navigate('/post/create')} >
                         <EditIcon />
                     </CustomIconButton>
 
@@ -87,7 +85,6 @@ const CustomAppBar = ({ handleSearch }: IProps) => {
                         </CustomIconButton>
                     </div>
                 </li>
-
 
             </div>
             <div style={{ height: '60px' }} />

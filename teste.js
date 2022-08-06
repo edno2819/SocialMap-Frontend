@@ -1,1 +1,0 @@
-var a = 'Lorem ipsum a tellus consectetur taciti dolor sit egestas justo nisl, auctor ullamcorper feugiat nam eget ac rhoncus feugiat. per proin ac senectus massa rhoncus duis, metus sociosqu etiam orci'

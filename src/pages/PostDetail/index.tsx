@@ -11,12 +11,14 @@ import CustomAvatar from "../../components/CustomAvatar";
 import { Post } from "../../Models/Post";
 import server from '../../api/server';
 import Utils from "../../Utils"
+
 import logo from '../../assets/logoAlert.png';
-
-
 import "./index.css";
 
-
+interface Comment {
+    value: string,
+    error: string
+}
 
 const PostDetail = () => {
     const token = localStorage.getItem('accessToken');
@@ -26,7 +28,7 @@ const PostDetail = () => {
 
     const { postId } = useParams();
     const [post, setPost] = useState<Post>();
-    const [comment, setComment] = useState({ value: "", error: "" });
+    const [comment, setComment] = useState<Comment>({value:'', error:''});
 
     useEffect(() => {
         const getPost = async () => {
@@ -40,7 +42,7 @@ const PostDetail = () => {
             } catch (err) {
                 toast.warning('Não foi possível carregar o post!', {
                     icon: () => <img src={logo} alt="logo SocialMap" />,
-                  });
+                });
             }
         }
         getPost();
@@ -51,7 +53,7 @@ const PostDetail = () => {
         if (comment.value.length === 0) {
             toast.warning('O comentário não deve ser vazio!', {
                 icon: () => <img src={logo} alt="logo SocialMap" />,
-              });
+            });
         } else {
             try {
                 const response = await server.post(`/posts/${postId}/comment`,
@@ -77,14 +79,14 @@ const PostDetail = () => {
             } catch (err) {
                 toast.error('Ocorreu um erro ao adicionar um comentário', {
                     icon: () => <img src={logo} alt="logo SocialMap" />,
-                  });
+                });
             }
         }
     };
 
     return (
         <div className='midDivPost'>
-            <CustomAppBar/>
+            <CustomAppBar />
 
             {post && <PostCard post={post} handlePostClick={() => { }} />}
             <br />
